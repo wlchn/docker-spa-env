@@ -41,7 +41,7 @@ CMD ["/goStatic"]
 
 3. Add config.js to your index.html
 ```
-    <script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="config.js"></script>
 ```
 4. Use window._env as your env
 ```
