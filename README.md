@@ -52,7 +52,11 @@ CMD ["/goStatic"]
 ```
 4. Use window._env as your env
 ```
-const _env = typeof window !== 'undefined' && window._env ? window._env : process.env;
+let _env = process.env;
+// check if there is env exits in local, otherwise using window._env
+if (_env.ENV_ABC) {
+  _env = window._env;
+}
 // so you can use env like _env.ENV_ABC
 ```
 
