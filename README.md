@@ -7,6 +7,9 @@ Config runtime ENV for spa(Single Page App). Let you build your image first, and
 ``` shell
 #!/bin/sh
 if [ $CONFIG_VARS ]; then
+  # clear
+  echo -n > ${CONFIG_FILE_PATH}/config.js
+
   SPLIT=$(echo $CONFIG_VARS | tr "," "\n")
   echo "window._env = {" >> ${CONFIG_FILE_PATH}/config.js
 
@@ -17,7 +20,11 @@ if [ $CONFIG_VARS ]; then
 
   echo "}" >> ${CONFIG_FILE_PATH}/config.js
 fi
-# exec your CMD
+
+# disable broswer cache
+sed -i "s/config.js?v=[0-9]*/config.js?v=$(date +'%s')/g" /srv/http/index.html
+
+# exec CMD
 exec "$@"
 ```
 2. Write Your Dockerfile Build your app. And serve the builed files and the config.js.
@@ -41,7 +48,7 @@ CMD ["/goStatic"]
 
 3. Add config.js to your index.html
 ```
-<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="/config.js?v="></script>
 ```
 4. Use window._env as your env
 ```
