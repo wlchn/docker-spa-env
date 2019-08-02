@@ -67,7 +67,7 @@ CONFIG_VARS=ABC,XYZ
 ABC=helloabc
 XYZ=HELLOXYZ
 
-# you coud get config.js
+# you can get config.js
 window._env = {
   ABC: "helloabc",
   XYZ: "HELLOXYZ",
